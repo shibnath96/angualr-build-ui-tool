@@ -1,0 +1,2817 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "common-game-components": {
+      "root": "projects/common-game-components",
+      "sourceRoot": "projects/common-game-components/src",
+      "projectType": "library",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "tsConfig": "projects/common-game-components/tsconfig.lib.json",
+            "project": "projects/common-game-components/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/common-game-components/src/test.ts",
+            "tsConfig": "projects/common-game-components/tsconfig.spec.json",
+            "karmaConfig": "projects/common-game-components/karma.conf.js",
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common-game-components/tsconfig.lib.json",
+              "projects/common-game-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "proofreading-game-engine": {
+      "root": "projects/proofreading-game-engine/",
+      "sourceRoot": "projects/proofreading-game-engine/src",
+      "projectType": "application",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/proofreading-game-engine",
+            "index": "projects/proofreading-game-engine/src/index.html",
+            "main": "projects/proofreading-game-engine/src/main.ts",
+            "polyfills": "projects/proofreading-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/proofreading-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/proofreading-game-engine/src/favicon.ico",
+              "projects/proofreading-game-engine/src/config.json",
+              "projects/proofreading-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/proofreading-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              {
+                "input": "node_modules/core-js/client/core.js"
+              }
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/proofreading-game-engine/src/environments/environment.ts",
+                  "with": "projects/proofreading-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "proofreading-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "proofreading-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "proofreading-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/proofreading-game-engine/src/test.ts",
+            "polyfills": "projects/proofreading-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/proofreading-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/proofreading-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/proofreading-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/proofreading-game-engine/src/favicon.ico",
+              "projects/proofreading-game-engine/src/config.json",
+              "projects/proofreading-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/proofreading-game-engine/tsconfig.app.json",
+              "projects/proofreading-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "proofreading-game-engine-e2e": {
+      "root": "projects/proofreading-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/proofreading-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "proofreading-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "proofreading-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/proofreading-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fib-game-engine": {
+      "root": "projects/fib-game-engine/",
+      "sourceRoot": "projects/fib-game-engine/src",
+      "projectType": "application",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/fib-game-engine",
+            "index": "projects/fib-game-engine/src/index.html",
+            "main": "projects/fib-game-engine/src/main.ts",
+            "polyfills": "projects/fib-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/fib-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/fib-game-engine/src/favicon.ico",
+              "projects/fib-game-engine/src/config.json",
+              "projects/fib-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/fib-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-ui-dist/jquery-ui.min.js",
+              "node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fib-game-engine/src/environments/environment.ts",
+                  "with": "projects/fib-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "fib-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fib-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fib-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/fib-game-engine/src/test.ts",
+            "polyfills": "projects/fib-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/fib-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/fib-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/fib-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fib-game-engine/src/favicon.ico",
+              "projects/fib-game-engine/src/config.json",
+              "projects/fib-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fib-game-engine/tsconfig.app.json",
+              "projects/fib-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fib-game-engine-e2e": {
+      "root": "projects/fib-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/fib-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "fib-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fib-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/fib-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "happyballoons-game-engine": {
+      "root": "projects/happyballoons-game-engine/",
+      "sourceRoot": "projects/happyballoons-game-engine/src",
+      "projectType": "application",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/happyballoons-game-engine",
+            "index": "projects/happyballoons-game-engine/src/index.html",
+            "main": "projects/happyballoons-game-engine/src/main.ts",
+            "polyfills": "projects/happyballoons-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/happyballoons-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/happyballoons-game-engine/src/favicon.ico",
+              "projects/happyballoons-game-engine/src/config.json",
+              "projects/happyballoons-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/happyballoons-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery-ui-dist/jquery-ui.min.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/happyballoons-game-engine/src/environments/environment.ts",
+                  "with": "projects/happyballoons-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "happyballoons-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "happyballoons-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "happyballoons-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/happyballoons-game-engine/src/test.ts",
+            "polyfills": "projects/happyballoons-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/happyballoons-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/happyballoons-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/happyballoons-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/happyballoons-game-engine/src/favicon.ico",
+              "projects/happyballoons-game-engine/src/config.json",
+              "projects/happyballoons-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/happyballoons-game-engine/tsconfig.app.json",
+              "projects/happyballoons-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "happyballoons-game-engine-e2e": {
+      "root": "projects/happyballoons-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/happyballoons-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "happyballoons-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "happyballoons-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/happyballoons-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "animatedmcq-game-engine": {
+      "root": "projects/animatedmcq-game-engine/",
+      "sourceRoot": "projects/animatedmcq-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/animatedmcq-game-engine",
+            "index": "projects/animatedmcq-game-engine/src/index.html",
+            "main": "projects/animatedmcq-game-engine/src/main.ts",
+            "polyfills": "projects/animatedmcq-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/animatedmcq-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/animatedmcq-game-engine/src/favicon.ico",
+              "projects/animatedmcq-game-engine/src/config.json",
+              "projects/animatedmcq-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/animatedmcq-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/animatedmcq-game-engine/src/environments/environment.ts",
+                  "with": "projects/animatedmcq-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "animatedmcq-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "animatedmcq-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "animatedmcq-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/animatedmcq-game-engine/src/test.ts",
+            "polyfills": "projects/animatedmcq-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/animatedmcq-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/animatedmcq-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/animatedmcq-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/animatedmcq-game-engine/src/favicon.ico",
+              "projects/animatedmcq-game-engine/src/config.json",
+              "projects/animatedmcq-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/animatedmcq-game-engine/tsconfig.app.json",
+              "projects/animatedmcq-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "animatedmcq-game-engine-e2e": {
+      "root": "projects/animatedmcq-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/animatedmcq-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "animatedmcq-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "animatedmcq-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/animatedmcq-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fib-authoring-engine": {
+      "root": "projects/fib-authoring-engine/",
+      "sourceRoot": "projects/fib-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/fib-authoring-engine",
+            "index": "projects/fib-authoring-engine/src/index.html",
+            "main": "projects/fib-authoring-engine/src/main.ts",
+            "polyfills": "projects/fib-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/fib-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/fib-authoring-engine/src/favicon.ico",
+              "projects/fib-authoring-engine/src/config.json",
+              "projects/fib-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/fib-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/fib-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/fib-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "fib-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fib-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fib-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/fib-authoring-engine/src/test.ts",
+            "polyfills": "projects/fib-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/fib-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/fib-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/fib-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/fib-authoring-engine/src/favicon.ico",
+              "projects/fib-authoring-engine/src/config.json",
+              "projects/fib-authoring-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fib-authoring-engine/tsconfig.app.json",
+              "projects/fib-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fib-authoring-engine-e2e": {
+      "root": "projects/fib-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/fib-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "fib-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "fib-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/fib-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "treasurehunt-game-engine": {
+      "root": "projects/treasurehunt-game-engine/",
+      "sourceRoot": "projects/treasurehunt-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/treasurehunt-game-engine",
+            "index": "projects/treasurehunt-game-engine/src/index.html",
+            "main": "projects/treasurehunt-game-engine/src/main.ts",
+            "polyfills": "projects/treasurehunt-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/treasurehunt-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/treasurehunt-game-engine/src/favicon.ico",
+              "projects/treasurehunt-game-engine/src/config.json",
+              "projects/treasurehunt-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/treasurehunt-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/treasurehunt-game-engine/src/environments/environment.ts",
+                  "with": "projects/treasurehunt-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "treasurehunt-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "treasurehunt-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "treasurehunt-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/treasurehunt-game-engine/src/test.ts",
+            "polyfills": "projects/treasurehunt-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/treasurehunt-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/treasurehunt-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/treasurehunt-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/treasurehunt-game-engine/src/favicon.ico",
+              "projects/treasurehunt-game-engine/src/config.json",
+              "projects/treasurehunt-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/treasurehunt-game-engine/tsconfig.app.json",
+              "projects/treasurehunt-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "treasurehunt-game-engine-e2e": {
+      "root": "projects/treasurehunt-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/treasurehunt-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "treasurehunt-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "treasurehunt-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/treasurehunt-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "happyballoons-authoring-engine": {
+      "root": "projects/happyballoons-authoring-engine/",
+      "sourceRoot": "projects/happyballoons-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/happyballoons-authoring-engine",
+            "index": "projects/happyballoons-authoring-engine/src/index.html",
+            "main": "projects/happyballoons-authoring-engine/src/main.ts",
+            "polyfills": "projects/happyballoons-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/happyballoons-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/happyballoons-authoring-engine/src/favicon.ico",
+              "projects/happyballoons-authoring-engine/src/config.json",
+              "projects/happyballoons-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/happyballoons-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+              {
+                "input": "node_modules/core-js/client/core.js"
+              }
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/happyballoons-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/happyballoons-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "happyballoons-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "happyballoons-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "happyballoons-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/happyballoons-authoring-engine/src/test.ts",
+            "polyfills": "projects/happyballoons-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/happyballoons-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/happyballoons-authoring-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/happyballoons-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/happyballoons-authoring-engine/src/favicon.ico",
+              "projects/happyballoons-authoring-engine/src/config.json",
+              "projects/happyballoons-authoring-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/happyballoons-authoring-engine/tsconfig.app.json",
+              "projects/happyballoons-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "happyballoons-authoring-engine-e2e": {
+      "root": "projects/happyballoons-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/happyballoons-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "happyballoons-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "happyballoons-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/happyballoons-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "proofreading-authoring-engine": {
+      "root": "projects/proofreading-authoring-engine/",
+      "sourceRoot": "projects/proofreading-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/proofreading-authoring-engine",
+            "index": "projects/proofreading-authoring-engine/src/index.html",
+            "main": "projects/proofreading-authoring-engine/src/main.ts",
+            "polyfills": "projects/proofreading-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/proofreading-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/proofreading-authoring-engine/src/favicon.ico",
+              "projects/proofreading-authoring-engine/src/config.json",
+              "projects/proofreading-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/proofreading-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/proofreading-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/proofreading-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "proofreading-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "proofreading-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "proofreading-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/proofreading-authoring-engine/src/test.ts",
+            "polyfills": "projects/proofreading-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/proofreading-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/proofreading-authoring-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/proofreading-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/proofreading-authoring-engine/src/favicon.ico",
+              "projects/proofreading-authoring-engine/src/config.json",
+              "projects/proofreading-authoring-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/proofreading-authoring-engine/tsconfig.app.json",
+              "projects/proofreading-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "proofreading-authoring-engine-e2e": {
+      "root": "projects/proofreading-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/proofreading-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "proofreading-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "proofreading-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/proofreading-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wordhighlight-game-engine": {
+      "root": "projects/wordhighlight-game-engine/",
+      "sourceRoot": "projects/wordhighlight-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/wordhighlight-game-engine",
+            "index": "projects/wordhighlight-game-engine/src/index.html",
+            "main": "projects/wordhighlight-game-engine/src/main.ts",
+            "polyfills": "projects/wordhighlight-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/wordhighlight-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/wordhighlight-game-engine/src/favicon.ico",
+              "projects/wordhighlight-game-engine/src/config.json",
+              "projects/wordhighlight-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/wordhighlight-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/wordhighlight-game-engine/src/environments/environment.ts",
+                  "with": "projects/wordhighlight-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "wordhighlight-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wordhighlight-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wordhighlight-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/wordhighlight-game-engine/src/test.ts",
+            "polyfills": "projects/wordhighlight-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/wordhighlight-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/wordhighlight-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/wordhighlight-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/wordhighlight-game-engine/src/favicon.ico",
+              "projects/wordhighlight-game-engine/src/config.json",
+              "projects/wordhighlight-game-engine/src/assets"
+            ],
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wordhighlight-game-engine/tsconfig.app.json",
+              "projects/wordhighlight-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wordhighlight-game-engine-e2e": {
+      "root": "projects/wordhighlight-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/wordhighlight-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "wordhighlight-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wordhighlight-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/wordhighlight-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "matchpic-game-engine": {
+      "root": "projects/matchpic-game-engine/",
+      "sourceRoot": "projects/matchpic-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/matchpic-game-engine",
+            "index": "projects/matchpic-game-engine/src/index.html",
+            "main": "projects/matchpic-game-engine/src/main.ts",
+            "polyfills": "projects/matchpic-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/matchpic-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/matchpic-game-engine/src/favicon.ico",
+              "projects/matchpic-game-engine/src/config.json",
+              "projects/matchpic-game-engine/src/assets"
+            ],
+            "styles": [
+              "projects/matchpic-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/matchpic-game-engine/src/environments/environment.ts",
+                  "with": "projects/matchpic-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "matchpic-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "matchpic-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "matchpic-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/matchpic-game-engine/src/test.ts",
+            "polyfills": "projects/matchpic-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/matchpic-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/matchpic-game-engine/karma.conf.js",
+            "styles": [
+              "projects/matchpic-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/matchpic-game-engine/src/favicon.ico",
+              "projects/matchpic-game-engine/src/config.json",
+              "projects/matchpic-game-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/matchpic-game-engine/tsconfig.app.json",
+              "projects/matchpic-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "matchpic-game-engine-e2e": {
+      "root": "projects/matchpic-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/matchpic-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "matchpic-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "matchpic-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/matchpic-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wordhighlight-authoring-engine": {
+      "root": "projects/wordhighlight-authoring-engine/",
+      "sourceRoot": "projects/wordhighlight-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/wordhighlight-authoring-engine",
+            "index": "projects/wordhighlight-authoring-engine/src/index.html",
+            "main": "projects/wordhighlight-authoring-engine/src/main.ts",
+            "polyfills": "projects/wordhighlight-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/wordhighlight-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/wordhighlight-authoring-engine/src/favicon.ico",
+              "projects/wordhighlight-authoring-engine/src/config.json",
+              "projects/wordhighlight-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/wordhighlight-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/wordhighlight-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/wordhighlight-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "wordhighlight-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "wordhighlight-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wordhighlight-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/wordhighlight-authoring-engine/src/test.ts",
+            "polyfills": "projects/wordhighlight-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/wordhighlight-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/wordhighlight-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/wordhighlight-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/wordhighlight-authoring-engine/src/favicon.ico",
+              "projects/wordhighlight-authoring-engine/src/config.json",
+              "projects/wordhighlight-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/wordhighlight-authoring-engine/tsconfig.app.json",
+              "projects/wordhighlight-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "wordhighlight-authoring-engine-e2e": {
+      "root": "projects/wordhighlight-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/wordhighlight-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "wordhighlight-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wordhighlight-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/wordhighlight-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "animatedmcq-authoring-engine": {
+      "root": "projects/animatedmcq-authoring-engine/",
+      "sourceRoot": "projects/animatedmcq-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/animatedmcq-authoring-engine",
+            "index": "projects/animatedmcq-authoring-engine/src/index.html",
+            "main": "projects/animatedmcq-authoring-engine/src/main.ts",
+            "polyfills": "projects/animatedmcq-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/animatedmcq-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/animatedmcq-authoring-engine/src/favicon.ico",
+              "projects/animatedmcq-authoring-engine/src/config.json",
+              "projects/animatedmcq-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/animatedmcq-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/animatedmcq-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/animatedmcq-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "animatedmcq-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "animatedmcq-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "animatedmcq-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/animatedmcq-authoring-engine/src/test.ts",
+            "polyfills": "projects/animatedmcq-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/animatedmcq-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/animatedmcq-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/animatedmcq-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/animatedmcq-authoring-engine/src/favicon.ico",
+              "projects/animatedmcq-authoring-engine/src/config.json",
+              "projects/animatedmcq-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/animatedmcq-authoring-engine/tsconfig.app.json",
+              "projects/animatedmcq-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "animatedmcq-authoring-engine-e2e": {
+      "root": "projects/animatedmcq-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/animatedmcq-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "animatedmcq-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "animatedmcq-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/animatedmcq-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "popobject-game-engine": {
+      "root": "projects/popobject-game-engine/",
+      "sourceRoot": "projects/popobject-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/popobject-game-engine",
+            "index": "projects/popobject-game-engine/src/index.html",
+            "main": "projects/popobject-game-engine/src/main.ts",
+            "polyfills": "projects/popobject-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/popobject-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/popobject-game-engine/src/favicon.ico",
+              "projects/popobject-game-engine/src/config.json",
+              "projects/popobject-game-engine/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/popobject-game-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "libs/jquery.pause.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/popobject-game-engine/src/environments/environment.ts",
+                  "with": "projects/popobject-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "popobject-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "popobject-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "popobject-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/popobject-game-engine/src/test.ts",
+            "polyfills": "projects/popobject-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/popobject-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/popobject-game-engine/karma.conf.js",
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "projects/popobject-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/popobject-game-engine/src/favicon.ico",
+              "projects/popobject-game-engine/src/config.json",
+              "projects/popobject-game-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/popobject-game-engine/tsconfig.app.json",
+              "projects/popobject-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "popobject-game-engine-e2e": {
+      "root": "projects/popobject-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/popobject-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "popobject-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "popobject-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/popobject-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "labeling-game-engine": {
+      "root": "projects/labeling-game-engine/",
+      "sourceRoot": "projects/labeling-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/labeling-game-engine",
+            "index": "projects/labeling-game-engine/src/index.html",
+            "main": "projects/labeling-game-engine/src/main.ts",
+            "polyfills": "projects/labeling-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/labeling-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/labeling-game-engine/src/favicon.ico",
+              "projects/labeling-game-engine/src/config.json",
+              "projects/labeling-game-engine/src/assets"
+            ],
+            "styles": [
+              "projects/labeling-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/labeling-game-engine/src/environments/environment.ts",
+                  "with": "projects/labeling-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "labeling-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "labeling-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "labeling-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/labeling-game-engine/src/test.ts",
+            "polyfills": "projects/labeling-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/labeling-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/labeling-game-engine/karma.conf.js",
+            "styles": [
+              "projects/labeling-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/labeling-game-engine/src/favicon.ico",
+              "projects/labeling-game-engine/src/config.json",
+              "projects/labeling-game-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/labeling-game-engine/tsconfig.app.json",
+              "projects/labeling-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "labeling-game-engine-e2e": {
+      "root": "projects/labeling-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/labeling-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "labeling-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "labeling-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/labeling-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "treasurehunt-authoring-engine": {
+      "root": "projects/treasurehunt-authoring-engine/",
+      "sourceRoot": "projects/treasurehunt-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/treasurehunt-authoring-engine",
+            "index": "projects/treasurehunt-authoring-engine/src/index.html",
+            "main": "projects/treasurehunt-authoring-engine/src/main.ts",
+            "polyfills": "projects/treasurehunt-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/treasurehunt-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/treasurehunt-authoring-engine/src/favicon.ico",
+              "projects/treasurehunt-authoring-engine/src/config.json",
+              "projects/treasurehunt-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/treasurehunt-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/treasurehunt-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/treasurehunt-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "treasurehunt-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "treasurehunt-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "treasurehunt-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/treasurehunt-authoring-engine/src/test.ts",
+            "polyfills": "projects/treasurehunt-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/treasurehunt-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/treasurehunt-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/treasurehunt-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/treasurehunt-authoring-engine/src/favicon.ico",
+              "projects/treasurehunt-authoring-engine/src/config.json",
+              "projects/treasurehunt-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/treasurehunt-authoring-engine/tsconfig.app.json",
+              "projects/treasurehunt-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "treasurehunt-authoring-engine-e2e": {
+      "root": "projects/treasurehunt-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/treasurehunt-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "treasurehunt-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "treasurehunt-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/treasurehunt-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sequencing-game-engine": {
+      "root": "projects/sequencing-game-engine/",
+      "sourceRoot": "projects/sequencing-game-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/sequencing-game-engine",
+            "index": "projects/sequencing-game-engine/src/index.html",
+            "main": "projects/sequencing-game-engine/src/main.ts",
+            "polyfills": "projects/sequencing-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/sequencing-game-engine/tsconfig.app.json",
+            "assets": [
+              "projects/sequencing-game-engine/src/favicon.ico",
+              "projects/sequencing-game-engine/src/config.json",
+              "projects/sequencing-game-engine/src/assets"
+            ],
+            "styles": [
+              "projects/sequencing-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sequencing-game-engine/src/environments/environment.ts",
+                  "with": "projects/sequencing-game-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "sequencing-game-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sequencing-game-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sequencing-game-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/sequencing-game-engine/src/test.ts",
+            "polyfills": "projects/sequencing-game-engine/src/polyfills.ts",
+            "tsConfig": "projects/sequencing-game-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/sequencing-game-engine/karma.conf.js",
+            "styles": [
+              "projects/sequencing-game-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/sequencing-game-engine/src/favicon.ico",
+              "projects/sequencing-game-engine/src/config.json",
+              "projects/sequencing-game-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sequencing-game-engine/tsconfig.app.json",
+              "projects/sequencing-game-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sequencing-game-engine-e2e": {
+      "root": "projects/sequencing-game-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sequencing-game-engine-e2e/protractor.conf.js",
+            "devServerTarget": "sequencing-game-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sequencing-game-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/sequencing-game-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "popobject-authoring-engine": {
+      "root": "projects/popobject-authoring-engine/",
+      "sourceRoot": "projects/popobject-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/popobject-authoring-engine",
+            "index": "projects/popobject-authoring-engine/src/index.html",
+            "main": "projects/popobject-authoring-engine/src/main.ts",
+            "polyfills": "projects/popobject-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/popobject-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/popobject-authoring-engine/src/favicon.ico",
+              "projects/popobject-authoring-engine/src/config.json",
+              "projects/popobject-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/popobject-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/core-js/client/core.js"
+            ],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/popobject-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/popobject-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "popobject-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "popobject-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "popobject-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/popobject-authoring-engine/src/test.ts",
+            "polyfills": "projects/popobject-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/popobject-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/popobject-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/popobject-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/popobject-authoring-engine/src/favicon.ico",
+              "projects/popobject-authoring-engine/src/config.json",
+              "projects/popobject-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/popobject-authoring-engine/tsconfig.app.json",
+              "projects/popobject-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "popobject-authoring-engine-e2e": {
+      "root": "projects/popobject-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/popobject-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "popobject-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "popobject-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/popobject-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sequencing-authoring-engine": {
+      "root": "projects/sequencing-authoring-engine/",
+      "sourceRoot": "projects/sequencing-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/sequencing-authoring-engine",
+            "index": "projects/sequencing-authoring-engine/src/index.html",
+            "main": "projects/sequencing-authoring-engine/src/main.ts",
+            "polyfills": "projects/sequencing-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/sequencing-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/sequencing-authoring-engine/src/favicon.ico",
+              "projects/sequencing-authoring-engine/src/config.json",
+              "projects/sequencing-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/sequencing-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sequencing-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/sequencing-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "sequencing-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sequencing-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sequencing-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/sequencing-authoring-engine/src/test.ts",
+            "polyfills": "projects/sequencing-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/sequencing-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/sequencing-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/sequencing-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/sequencing-authoring-engine/src/favicon.ico",
+              "projects/sequencing-authoring-engine/src/config.json",
+              "projects/sequencing-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sequencing-authoring-engine/tsconfig.app.json",
+              "projects/sequencing-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "sequencing-authoring-engine-e2e": {
+      "root": "projects/sequencing-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sequencing-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "sequencing-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sequencing-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/sequencing-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "labeling-authoring-engine": {
+      "root": "projects/labeling-authoring-engine/",
+      "sourceRoot": "projects/labeling-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/labeling-authoring-engine",
+            "index": "projects/labeling-authoring-engine/src/index.html",
+            "main": "projects/labeling-authoring-engine/src/main.ts",
+            "polyfills": "projects/labeling-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/labeling-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/labeling-authoring-engine/src/favicon.ico",
+              "projects/labeling-authoring-engine/src/config.json",
+              "projects/labeling-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/labeling-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/labeling-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/labeling-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "labeling-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "labeling-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "labeling-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/labeling-authoring-engine/src/test.ts",
+            "polyfills": "projects/labeling-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/labeling-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/labeling-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/labeling-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/labeling-authoring-engine/src/favicon.ico",
+              "projects/labeling-authoring-engine/src/config.json",
+              "projects/labeling-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/labeling-authoring-engine/tsconfig.app.json",
+              "projects/labeling-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "labeling-authoring-engine-e2e": {
+      "root": "projects/labeling-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/labeling-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "labeling-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "labeling-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/labeling-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "matchpic-authoring-engine": {
+      "root": "projects/matchpic-authoring-engine/",
+      "sourceRoot": "projects/matchpic-authoring-engine/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:build",
+          "options": {
+            "outputPath": "dist/matchpic-authoring-engine",
+            "index": "projects/matchpic-authoring-engine/src/index.html",
+            "main": "projects/matchpic-authoring-engine/src/main.ts",
+            "polyfills": "projects/matchpic-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/matchpic-authoring-engine/tsconfig.app.json",
+            "assets": [
+              "projects/matchpic-authoring-engine/src/favicon.ico",
+              "projects/matchpic-authoring-engine/src/config.json",
+              "projects/matchpic-authoring-engine/src/assets"
+            ],
+            "styles": [
+              "projects/matchpic-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/matchpic-authoring-engine/src/environments/environment.ts",
+                  "with": "projects/matchpic-authoring-engine/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "matchpic-authoring-engine:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "matchpic-authoring-engine:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "matchpic-authoring-engine:build"
+          }
+        },
+        "test": {
+          "builder": "ngx-build-plus:karma",
+          "options": {
+            "main": "projects/matchpic-authoring-engine/src/test.ts",
+            "polyfills": "projects/matchpic-authoring-engine/src/polyfills.ts",
+            "tsConfig": "projects/matchpic-authoring-engine/tsconfig.spec.json",
+            "karmaConfig": "projects/matchpic-authoring-engine/karma.conf.js",
+            "styles": [
+              "projects/matchpic-authoring-engine/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/matchpic-authoring-engine/src/favicon.ico",
+              "projects/matchpic-authoring-engine/src/config.json",
+              "projects/matchpic-authoring-engine/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/matchpic-authoring-engine/tsconfig.app.json",
+              "projects/matchpic-authoring-engine/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "matchpic-authoring-engine-e2e": {
+      "root": "projects/matchpic-authoring-engine-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/matchpic-authoring-engine-e2e/protractor.conf.js",
+            "devServerTarget": "matchpic-authoring-engine:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "matchpic-authoring-engine:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/matchpic-authoring-engine-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "proofreading-game-engine",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
+}

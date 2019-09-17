@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+
+    <title>Explore the directory</title>
+</head>
+
+<body>
+    <!-- Loader... -->
+    <div class="loading" style="display: none">Loading&#8230;
+        <br>
+        <span class="overLayText">Creating ZIP packages...</span>
+    </div>
+
+    <div class="container">
+
+        <form action="#" method="post" id="packageForm" autocomplete="off">
+            <div class="main-container">
+                <div class="row">
+
+                    <div class="col-sm-5">
+
+                        <div class="panel-group">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Select a game</div>
+                                <div class="panel-body" style="padding: 35px;">
+                                    <div class="row engine-selector">
+                                        <select class="form-control" name="engineFolder" id="engineFolder">
+                                            <option value="select">Select a game</option>
+                                            <% groupArray.forEach( function( item, index ){ %>
+                                            <option value="<%= index%>"><%= item.title.toUpperCase()%></option>
+                                            <%  }); %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div> 
+
+                    </div>
+
+                    <div class="col-sm-7">
+                    
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Operations</div>
+                            <div class="panel-body" style="padding: 10px 40px 15px 40px;">
+
+                                <h4>Game Name</h4>
+                    
+                                <form action="">
+                                    <div class="radio">
+                                        <label><input type="radio" name="optradio">Game</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label><input type="radio" name="optradio">Authoring</label>
+                                    </div>
+                                    <!-- <div class="radio">
+                                        <label><input type="radio" name="optradio">Option 1</label>
+                                    </div> -->
+                                    <div class="row zipBtnContainer">
+                                        <button id="zipCreatorBtn" class="btn btn-primary" disabled="true">Create Build</button>
+                                    </div>
+                                </form>
+                    
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!-- jQuery library -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <!-- custom JS -->
+    <script src="/assets/js/folder-explore.js"></script>
+
+</body>
+
+</html>
