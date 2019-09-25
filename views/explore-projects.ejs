@@ -33,7 +33,7 @@
                                 <div class="panel-heading">Select a game</div>
                                 <div class="panel-body" style="padding: 35px;">
                                     <div class="row engine-selector">
-                                        <select class="form-control" name="engineFolder" id="engineFolder">
+                                        <select class="form-control" name="selectGame" id="selectGame">
                                             <option value="select">Select a game</option>
                                             <% groupArray.forEach( function( item, index ){ %>
                                             <option value="<%= index%>"><%= item.title.toUpperCase()%></option>
@@ -50,7 +50,7 @@
 
                     <div class="col-sm-7">
                     
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary" id="operationContainer" style="display: none;">
                             <div class="panel-heading">Operations</div>
                             <div class="panel-body" style="padding: 10px 40px 15px 40px;">
 
@@ -58,16 +58,16 @@
                     
                                 <form action="">
                                     <div class="radio">
-                                        <label><input type="radio" name="optradio" value="game">Game</label>
+                                        <label><input type="radio" name="buildOption" id="game">Game</label>
                                     </div>
                                     <div class="radio">
-                                        <label><input type="radio" name="optradio" value="authoring">Authoring</label>
+                                        <label><input type="radio" name="buildOption" id="authoring">Authoring</label>
                                     </div>
-                                    <!-- <div class="radio">
-                                        <label><input type="radio" name="optradio">Option 1</label>
-                                    </div> -->
+                                    <div class="radio">
+                                        <label><input type="radio" name="buildOption" id="both">Both (Game & Authoring)</label>
+                                    </div>
                                     <div class="row zipBtnContainer">
-                                        <button id="zipCreatorBtn" class="btn btn-primary" disabled="true">Create Build</button>
+                                        <button id="buildBtn" class="btn btn-primary" disabled="true">Create Build</button>
                                     </div>
                                 </form>
                     
@@ -82,13 +82,16 @@
 
     </div>
 
+    <script>
+        var groupArray = <%- JSON.stringify(groupArray)%>;
+    </script>
 
     <!-- jQuery library -->
     <script src="/assets/js/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="/assets/js/bootstrap.min.js"></script>
     <!-- custom JS -->
-    <script src="/assets/js/folder-explore.js"></script>
+    <script src="/assets/js/explore-projects.js"></script>
 
 </body>
 
