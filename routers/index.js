@@ -30,6 +30,12 @@ router.get('/project-explorer', function(req, res) {
     })
 });
 
+router.post('/make-the-build', (req, res) => {
+    var buildOption = req.query.buildOption;
+    console.log(req.query);
+    res.send(req.query);
+});
+
 module.exports = router;
 
 function makeGroup( data ) {
