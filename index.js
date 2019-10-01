@@ -1,9 +1,15 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
 
 const path = require('path');
 
 var router = require('./routers/index');
+
+// parse application/x-www-form-urlencoded
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

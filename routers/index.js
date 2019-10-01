@@ -30,6 +30,19 @@ router.get('/project-explorer', function(req, res) {
     })
 });
 
+router.post('/make-the-build', (req, res) => {
+    var buildOption = req.body.buildOption;
+    console.log(buildOption);
+
+    if ( buildOption.split('|').length > 1  ) {
+        //Multi-build process
+        res.send('Multi-build! ---> ' + buildOption);
+    } else {
+        //Single-build process
+        res.send('Single-build! ---> ' + buildOption);
+    }
+});
+
 module.exports = router;
 
 function makeGroup( data ) {
